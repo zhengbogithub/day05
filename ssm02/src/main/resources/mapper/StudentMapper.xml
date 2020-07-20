@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.StudentMapper">
+<select id="findAll" parameterType="studentVo" resultType="studentVo">
+select s.*,t.tname tname from tb_student s,teacher t
+<where>
+s.tb_student_tid=t.tid
+<if test="tbStudentName!=null and tbStudentName!=''">
+and tb_student_name like '%${tbStudentName}%'
+</if>
+<if test="age1!=null">
+and tb_student_age &gt;=#{age1}
+</if>
+<if test="age2!=null">
+and tb_student_age &lt;=#{age2}
+</if>
+<if test="birthday1!=null">
+and tb_student_birthday &gt;=#{birthday1} 
+</if>
+<if test="birthday2!=null">
+and tb_student_birthday &lt;=#{birthday2} 
+</if>
+<if test="tbStudentTid!=null and tbStudentTid!=0">
+and tb_student_tid =#{tbStudentTid}
+</if>
+</where>
+</select>
+ 
+</mapper>
